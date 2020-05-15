@@ -1,6 +1,7 @@
 class User:		
-    def __init__(self,dni,email,phonenumber):
-    	self.DNI = dni
-    	self.Email = email
-    	self.PhoneNumber = phonenumber
+    DNI = None
+    Email = None
+    Name = None
+    PhoneNumber = None
+    def __init__(self):
         pass

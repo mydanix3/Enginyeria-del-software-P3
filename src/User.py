@@ -1,7 +1,11 @@
 class User:
 
 
-    def __init__(self,name,dni,DirPostal,phonenumber,email):
+    def __init__(self):
+        pass
+      
+
+    def DadesUsuari(self,name,dni,DirPostal,phonenumber,email):
         self.DNI = dni
         self.PhoneNumber = phonenumber
         self.Email = email

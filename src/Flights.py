@@ -1,29 +1,25 @@
 class Flights:
 
-    def get_always_true():
-        return False
-    
-    def getPassengers(self):
-        return self.Passengers
-    
-    # def __init__(self):
-    #     pass
-
-    def __init__(self,destino,gente):
-        self.Destination = destino
-        self.Passengers = gente
+    def __init__(self):
+        self.Destination = []
+        self.Passengers = 0
         self.Code = []
         self.Preu = []
-        if destino:
-            for i in destino:
-                self.Code.append(self.getCodiVol(i,  self.Passengers))
-                self.Preu.append(self.getPreuVol(self.Code[-1]))
         
-        
+
+    def addPassengers(self,passengers):
+        self.Passengers += passengers
+
     def addDestination(self, destination):
-        self.Code.append(self.getCodiVol(destination, self.Passengers))
-        self.Destination.append(destination)
-        self.Preu.append(self.getPreuVol(self.Code[-1]))
+        listaux=[]
+        if type(destination) == str:
+            listaux.append(destination)
+        else:
+            listaux = destination
+        for x,i in enumerate(listaux):
+            self.Code.append(self.getCodiVol(destination, self.Passengers))
+            self.Destination.append(listaux[x])
+            self.Preu.append(self.getPreuVol(self.Code[-1]))
 
 
     def remDestination(self, destination):
@@ -32,6 +28,21 @@ class Flights:
             self.Destination.pop(index)
             self.Preu.pop(index)
             self.Code.pop(index)
+
+    def get_always_true():
+        return False
+
+    def getPassengers(self):
+        return self.Passengers
+
+    def getDestination(self):
+        return self.Destination
+
+    def getCode(self):
+        return self.Code
+
+    def getPreu(self):
+        return self.Preu
             
             
     def getTotalToPay(self):

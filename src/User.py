@@ -2,7 +2,11 @@ class User:
 
 
     def __init__(self):
-        pass
+        self.DNI = ""
+        self.PhoneNumber = ""
+        self.Email = ""
+        self.Name = ""
+        self.PostalAdress = ""
       
 
     def DadesUsuari(self,name,dni,DirPostal,phonenumber,email):

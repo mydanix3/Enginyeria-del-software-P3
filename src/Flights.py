@@ -11,43 +11,31 @@ class Flights:
     def addPassengers(self,passengers):
         self.Passengers += passengers
 
-    def addDestination(self, destination, dias):
-        listaux=[]
-        if type(destination) == str:
-            listaux.append(destination)
-        else:
-            listaux = destination
-        for x,i in enumerate(listaux):
-            self.Code.append(self.getCodiVol(destination, self.Passengers))
-            self.Destination.append(listaux[x])
-            self.Preu.append(self.getPreuVol(self.Code[-1]))
+    def addDestination(self, destination, code, dias, preu):
+            self.Code.append(code)
+            self.Destination.append(destination)
+            self.Preu.append(preu)
             self.Dias.append(dias)
 
-    def remDestination(self, destination):
-        if destination in self.Destination:
-            index = self.Destination.index(destination)
+    def remDestination(self, code):
+        if code in self.Code:
+            index = self.Code.index(code)
             self.Destination.pop(index)
             self.Preu.pop(index)
             self.Code.pop(index)
             self.Dias.pop(index)
 
-    def get_always_true():
-        return False
-
     def getPassengers(self):
         return self.Passengers
-
+    
     def getDestination(self):
         return self.Destination
-
+    
     def getCode(self):
         return self.Code
-
-    def getPreu(self):
-        return self.Preu
-
-
-    def getTotalToPay(self):
+    
+    
+    def getPreuFlights(self):
 
         Total_Pay = 0
 
@@ -56,13 +44,3 @@ class Flights:
 
         Total_Pay = Total_Pay * self.Passengers
         return Total_Pay
-
-    ##dummy function API skyscanner returns codi vol depenent numero de passatgers i destinació,
-    ##buscarà vol més barat
-    def getCodiVol(self, destination, passenger):
-        codi = 0
-        return codi
-
-    ##dummy function API skyscanner returns preu vol depenens el seu codi
-    def getPreuVol(self, codivol):
-        return 0

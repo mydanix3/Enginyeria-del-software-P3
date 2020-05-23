@@ -4,23 +4,23 @@ from unittest import mock
 
 class Test_Cars(unittest.TestCase):
 
-    def test_preu_cars_add():
+    def test_preu_cars_add(self):
         reserva = Reserva()
         reserva.addPassengers(8)
-        preuInicial = reserva.getPreuTotal()
+ 
         reserva.addCar("17842","Chevrolet","Roma",6,20)
-        preuFinal = preuInicial+40
-        self.assertEqual(preuFinal,reserva.getPreuTotal())
+
+        self.assertEqual(240,reserva.getPreuTotal())
 
     def test_preu_remove_cars(self):
         reserva = Reserva()
         reserva.addPassengers(8)
         reserva.addCar("17842","Chevrolet","Roma",6,20)
         reserva.addCar("19888","Mazda","Italia",6,25)
-        preuInicial = reserva.getPreuTotal()
+
         reserva.removeCar("19888")
-        preuFinal = preuInicial-50
-        self.assertEqual(preuFinal, reserva.getPreuTotal())
+
+        self.assertEqual(240, reserva.getPreuTotal())
 
     def test_confirmacio_cars_correcte(self):
 
@@ -35,7 +35,7 @@ class Test_Cars(unittest.TestCase):
 
         self.assertTrue(b)
 
-    @mock.patch('src.Skyscanner.Skyscanner.confirm_reserve')
+    @mock.patch('src.Rentalcars.Rentalcars.confirm_reserve')
     def test_confirmacio_cars_erroni(self,mock_confirm):
 
         reserva = Reserva()

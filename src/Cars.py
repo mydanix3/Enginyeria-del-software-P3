@@ -18,7 +18,7 @@ class Cars:
 
     def removeCar(self,_code):
         if _code in self.Code:
-            index = self.Code.index(destination)
+            index = self.Code.index(_code)
             self.Code.pop(index)
             self.Marca.pop(index)
             self.DuradaReserva.pop(index)
@@ -28,5 +28,5 @@ class Cars:
     def getPreu(self):
         preu = 0
         for index, i in enumerate(self.Preus):
-                preu = i * self.NumeroCotxes[index]
+                preu = i * self.NumeroCotxes[index]*self.DuradaReserva[index]
         return preu

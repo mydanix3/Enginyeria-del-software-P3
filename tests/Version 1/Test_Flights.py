@@ -5,189 +5,145 @@ from unittest import mock
 class Test_Flights(unittest.TestCase):
 
 
-    def test_Viajeros(self):
-        '''
-        vols = Flights(['Roma'], 3)
-        self.assertEqual(vols.getPassengers(), 3)
-        '''
+    def test_Numero_Viatgers_Esperat(self):
+      
         reserva = Reserva()
-        reserva.addDestination(['Roma'],[5])
+        
         reserva.addPassengers(3)
         self.assertEqual(reserva.getPassengers(), 3)
 
-    def test_ListaDestinoVacia(self):
+    def test_Lista_Destinacio_Buida_Si_Viatge_Sense_Destinacions(self):
 
-
-        '''
-        vols = Flights([], 3)
-        self.assertEqual(vols.Destination, [])
-        '''
         reserva = Reserva()
-        reserva.addDestination([],[])
-        reserva.addPassengers(3)
+        
         self.assertEqual(reserva.getDestination(), [])
+          
+        reserva.addDestination('Roma', 123, 5, 50)
+        
+        reserva.remDestination(123)
+        
+        self.assertEqual(reserva.getDestination(), [])
+      
 
 
-    def test_ListaVueloVacia(self):
-        '''
-        vols = Flights([], 3)
-        self.assertEqual(vols.Code, [])
-        '''
+    def test_Llista_Vols_Buida_Si_Viatge_Sense_Destinacions(self):
+       
         reserva = Reserva()
-        reserva.addDestination([],[])
-        reserva.addPassengers(3)
+        
+        self.assertEqual(reserva.getCode(), [])
+        
+        reserva.addDestination('Roma', 123, 5, 50)
+        
+        reserva.remDestination(123)
+        
         self.assertEqual(reserva.getCode(), [])
 
-    def test_PrecioVacio(self):
-        '''
-        vols = Flights([], 3)
-        self.assertEqual(vols.getTotalToPay(), 0)
-        '''
+    def test_Preu_si_Viatge_Vols_Sense_Destinacions(self):
+      
         reserva = Reserva()
-        reserva.addDestination([],[])
-        reserva.addPassengers(3)
-        self.assertEqual(reserva.getTotalToPay(), 0)
+     
+        self.assertEqual(reserva.getPreuTotal(), 0)
+        
+        reserva.addDestination('Roma', 123, 5, 50)
+        
+        reserva.remDestination(123)
+        
+        self.assertEqual(reserva.getPreuTotal(), 0)
 
-    def test_AddDestino_destino(self):
-        '''
-        vols = Flights(['Roma'], 3)
-        vols.addDestination("Italia")
-        self.assertEqual(vols.Destination, ['Roma', 'Italia'])
-        '''
+    def test_Llista_Destins_Afegint_destins(self):
+       
         reserva = Reserva()
-        reserva.addDestination(['Roma'],[5])
         reserva.addPassengers(3)
-        reserva.addDestination('Italia',[7])
-        self.assertEqual(reserva.getDestination(), ['Roma', 'Italia'])
+        reserva.addDestination('Roma', 123, 5, 50)
+        self.assertEqual(reserva.getDestination(), ['Roma'])
+        reserva.addDestination('Florencia',321, 1, 40)
+        self.assertEqual(reserva.getDestination(), ['Roma', 'Florencia'])
 
-    @mock.patch('src.Flights.Flights.getCodiVol')
-    def test_AddDestino_codigo(self, mock_flights):
-        '''
-        mock_flights.return_value = 123
-        vols = Flights(["Roma"],3)
-        mock_flights.return_value = 321
-        vols.addDestination("Italia")
-        self.assertEqual(vols.Code, [123,321])
-        '''
+
+    def test_Llista_Codis_Afegint_destins(self):
+       
         reserva = Reserva()
-        mock_flights.return_value = 123
-        reserva.addDestination(['Roma'],[5])
+
         reserva.addPassengers(3)
-        mock_flights.return_value = 321
-        reserva.addDestination('Italia',[1])
+        reserva.addDestination('Roma', 123, 5, 50)
+        self.assertEqual(reserva.getCode(), [123])
+        
+        reserva.addDestination('Florencia', 321, 1, 40)
         self.assertEqual(reserva.getCode(), [123, 321])
 
-    @mock.patch('src.Flights.Flights.getPreuVol')
-    def test_PreuEsperat(self, mock_preus):
-        '''
-        mock_preus.return_value = 50
-        vols = Flights(["Roma"],1)
-        self.assertEqual(vols.getTotalToPay(), 50)
-        mock_preus.return_value = 40
-        vols.addDestination("Italia")
-        self.assertEqual(vols.getTotalToPay(), 90)
-        '''
+    def test_Preu_Esperat_Amb_Un_Viatger(self):
+    
         reserva = Reserva()
-        mock_preus.return_value = 50
-        reserva.addDestination(['Roma'],[6])
+
         reserva.addPassengers(1)
-        self.assertEqual(reserva.getTotalToPay(), 50)
-        mock_preus.return_value = 40
-        reserva.addDestination('Italia',[2])
-        self.assertEqual(reserva.getTotalToPay(), 90)
+        reserva.addDestination('Roma', 123, 6, 50)
+        
+        self.assertEqual(reserva.getPreuTotal(), 50)   
+       
+        reserva.addDestination('Florencia', 321, 2, 40)
+        
+        self.assertEqual(reserva.getPreuTotal(), 90)
 
-    @mock.patch('src.Flights.Flights.getPreuVol')
-    def test_PreuEsperatMultiple(self, mock_preus):
-        '''
-        mock_preus.return_value = 50
-        vols = Flights(["Roma"],3)
-        self.assertEqual(vols.getTotalToPay(), 150)
-        mock_preus.return_value = 40
-        vols.addDestination("Italia")
-        self.assertEqual(vols.getTotalToPay(), 270)
-        '''
+    def test_Preu_Esperat_Amb_Mes_Dun_Passatger(self):
+       
         reserva = Reserva()
-        mock_preus.return_value = 50
-        reserva.addDestination(['Roma'],[2])
-        reserva.addPassengers(3)
-        self.assertEqual(reserva.getTotalToPay(), 150)
-        mock_preus.return_value = 40
-        reserva.addDestination('Italia',[2])
-        self.assertEqual(reserva.getTotalToPay(), 270)
+        
+        reserva.addPassengers(3)     
+        reserva.addDestination('Roma', 123, 6, 50)
+        
+        self.assertEqual(reserva.getPreuTotal(), 150)
+       
+        reserva.addDestination('Florencia', 321, 2, 40)
+        
+        self.assertEqual(reserva.getPreuTotal(), 270)
 
-    def test_RmDestino_destino(self):
-        '''
-        vols = Flights(["Roma","Italia","Belgica"],3)
-        vols.remDestination("Italia")
-        self.assertEqual(vols.Destination, ["Roma", "Belgica"])
-        '''
+
+    def test_Llista_De_Destins_Esperada_eliminant_un_desti(self):
+       
+        
         reserva = Reserva()
-        reserva.addDestination(['Roma', 'Italia', 'Belgica'],[2,5,6])
+        
         reserva.addPassengers(3)
-        reserva.remDestination('Italia')
+        reserva.addDestination('Roma', 123, 2, 50)
+        reserva.addDestination('Florencia', 321, 5, 40)
+        reserva.addDestination('Belgica', 444, 6, 30)
+        
+        reserva.remDestination(321)
+        
         self.assertEqual(reserva.getDestination(), ["Roma", "Belgica"])
 
-    @mock.patch('src.Flights.Flights.getCodiVol')
-    def test_RmDestino_codigo(self, mock_flights):
-        '''
-        mock_flights.return_value = 123
-        vols = Flights(["Roma"],3)
-        mock_flights.return_value = 321
-        vols.addDestination("Italia")
-        mock_flights.return_value = 444
-        vols.addDestination("Belginca")
-        vols.remDestination("Italia")
-        self.assertEqual(vols.Code, [123, 444])
-        '''
+
+    def test_Llista_de_Codis_Esperada_eliminant_un_desti(self):
+       
         reserva = Reserva()
-        mock_flights.return_value = 123
-        reserva.addDestination(['Roma'],[2])
+        
         reserva.addPassengers(3)
-        mock_flights.return_value = 321
-        reserva.addDestination('Italia',[2])
-        mock_flights.return_value = 444
-        reserva.addDestination('Belgica',[2])
-        reserva.remDestination('Italia')
+        reserva.addDestination('Roma', 123, 2, 50)
+        reserva.addDestination('Florencia', 321, 5, 40)
+        reserva.addDestination('Belgica', 444, 6, 30)
+        
+        reserva.remDestination(321)
+        
         self.assertEqual(reserva.getCode(), [123, 444])
 
-    @mock.patch('src.Flights.Flights.getPreuVol')
-    def test_RmDestino_preu(self, mock_flights):
-        '''
-        mock_flights.return_value = 50
-        vols = Flights(["Roma"],3)
-        mock_flights.return_value = 40
-        vols.addDestination("Italia")
-        mock_flights.return_value = 30
-        vols.addDestination("Belginca")
-        self.assertEqual(vols.getTotalToPay(), 360)
-        vols.remDestination("Italia")
-        self.assertEqual(vols.getTotalToPay(), 240)
-        '''
+
+    def test_Preu_esperat_eliminant_un_desti(self):
+        
+        
         reserva = Reserva()
-        mock_flights.return_value = 50
-        reserva.addDestination('Roma',[2])
+        
         reserva.addPassengers(3)
-        mock_flights.return_value = 40
-        reserva.addDestination("Italia",[2])
-        mock_flights.return_value = 30
-        reserva.addDestination("Belgica",[2])
-        self.assertEqual(reserva.getTotalToPay(), 360)
-        reserva.remDestination('Italia')
-        self.assertEqual(reserva.getTotalToPay(), 240)
-
-
-<<<<<<< Updated upstream
-    
+        reserva.addDestination('Roma', 123, 2, 50)
+        reserva.addDestination('Florencia', 321, 5, 40)
+        reserva.addDestination('Belgica', 444, 6, 30)
         
+        self.assertEqual(reserva.getPreuTotal(), 360)
         
-    
-    
-=======
+        reserva.remDestination(321)
+        
+        self.assertEqual(reserva.getPreuTotal(), 240)
 
 
-
-
->>>>>>> Stashed changes
 
 
 

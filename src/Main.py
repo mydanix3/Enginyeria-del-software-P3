@@ -20,14 +20,22 @@ class Reserva:
         self.rentalcars = Rentalcars()
         self.skyscanner = Skyscanner()
         self.user = User()
+        self.numero_de_vegades_pagament_fallat = 0
 
     def getPreuTotal(self):
-        return self.getPreuFlights() + self.getPreuHotels() + self.preuFinal()
+        return self.getPreuFlights() + self.getPreuHotels() + self.getPreuCars()
 
     #Clase Bank
     def do_payment(self):
-        return self.bank.do_payment(self.user, self.paymentdata)
-
+        
+        b = self.bank.do_payment(self.user, self.paymentdata)
+           
+        if(b):
+            print("El pagament s'ha realitzat correctament.")
+        else:
+            print("Error al fer el pagament, introdueixi les dades un altre cop.")
+            
+        return b
     #Clase Booking
     def confirm_reserve_Hotels(self) -> bool:
         b = self.booking.confirm_reserve(self.user, self.hotels)
@@ -46,7 +54,7 @@ class Reserva:
         if(b):
             print("la reserva del coche se ha realizado correctamente")
         else:
-            print("La reserva de los coche ha fallado por algún motivo.")
+            print("La reserva de los coches ha fallado por algún motivo.")
 
         return b
 
@@ -65,10 +73,10 @@ class Reserva:
     def getPreuCars(self):
         return self.cars.getPreu()
 
-    def addCars(self, code,marca,destination,dias,preu):
+    def addCar(self, code,marca,destination,dias,preu):
         self.cars.addCar(code,marca,destination,dias,preu,self.flights.getPassengers())
 
-    def removeCars(self, code):
+    def removeCar(self, code):
         self.cars.removeCar(code)
 
 
@@ -77,20 +85,24 @@ class Reserva:
         self.flights.addPassengers(passengers)
         self.hotels.addGuests(passengers)
 
-    def addDestination(self, lista):
-        self.flights.addDestination(lista)
+    def addDestination(self, destination, code, dias, preu):
+        self.flights.addDestination(destination, code, dias, preu)
 
-    def remDestination(self, destination):
-        self.flights.remDestination(destination)
+    def remDestination(self, code):
+        self.flights.remDestination(code)
 
     def getPreuFlights(self):
-        return self.flights.getTotalToPay()
-
-    def getCodiVol(self, destination, passenger):
-        return self.flights.getCodiVol(destination, passenger)
+        return self.flights.getPreuFlights()
 
     def getPassengers(self):
         return self.flights.getPassengers()
+    
+    def getDestination(self):
+        return self.flights.getDestination()
+    
+    def getCode(self):
+        return self.flights.getCode()
+
 
     #Clase Hotels
     def getPreuHotels(self):

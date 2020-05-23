@@ -6,5 +6,5 @@ save_non_project_files = False
 
 [main]
 version = 0.2.0
-recent_files = ['..\\..\\..\\..\\..\\.spyder-py3\\temp.py', 'tests\\Version 1\\JOG2.py', 'tests\\Version 1\\__init__.py', 'tests\\Version 1\\Test_Flights.py']
+recent_files = ['src\\Flights.py', 'src\\Bank.py', 'src\\PaymentData.py', 'src\\User.py', 'tests\\Version 1\\Test_Bank.py', 'tests\\Version 1\\Test_Flights.py', 'src\\Hotels.py', 'src\\Cars.py', 'src\\Booking.py', 'src\\Skyscanner.py', 'tests\\Version 1\\Test_SkyScanner.py', 'src\\Main.py', 'src\\readme.txt']
 

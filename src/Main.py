@@ -21,20 +21,30 @@ class Reserva:
         self.skyscanner = Skyscanner()
         self.user = User()
 
+    def getPreuTotal(self):
+        return self.getPreuFlights() + self.getPreuHotels()
     #Clase Bank
     def do_payment(self):
         return self.bank.do_payment(self.user, self.paymentdata)
 
     #Clase Booking
-    def confirm_reserve(self, user: User, hotels: Hotels) -> bool:
-        return self.booking.confirm_reserve(user,hotels)
+    def confirm_reserve_Hotels(self) -> bool:
+        b = self.booking.confirm_reserve(self.user, self.hotels)
+        
+        if(b):
+            print("la reserva del hotel se ha realizado correctamente")
+        else:
+            print("La reserva de los hoteles ha fallado por algún motivo.")
+        
+        return b
 
     #Clase Cars
 
 
-    # Clase Flights
+    # Clase Flights     
     def addPassengers(self,passengers):
         self.flights.addPassengers(passengers)
+        self.hotels.addGuests(passengers)
 
     def addDestination(self, lista):
         self.flights.addDestination(lista)
@@ -42,7 +52,7 @@ class Reserva:
     def remDestination(self, destination):
         self.flights.remDestination(destination)
 
-    def getTotalToPay(self):
+    def getPreuFlights(self):
         return self.flights.getTotalToPay()
 
     def getCodiVol(self, destination, passenger):
@@ -68,6 +78,15 @@ class Reserva:
 
 
     #Clase Hotels
+    def getPreuHotels(self):
+        return self.hotels.getPreu()
+    
+    def addHotel(self, name, days, code, preu):
+        self.hotels.addHotel(name, days, code, preu)
+
+    def remHotel(self, code):
+        self.hotels.remHotel(code)
+
 
     #Clase PaymentData
     def SelectTargeta(self, targeta):
@@ -83,12 +102,12 @@ class Reserva:
         return self.paymentdata.GetTargeta()
 
     #Clase Rentalcars
-    def confirm_reserve(self, user: User, cars: Cars) -> bool:
-        return self.rentalcars.confirm_reserve(user, cars)
+    def confirm_reserve_cotxes(self) -> bool:
+        return self.rentalcars.confirm_reserve(self.user, self.cars)
 
     #Clase Skyscanner
-    def confirm_reserve(self, user: User, flights: Flights) -> bool:
-        return self.skyscanner.confirm_reserve(user, flights)
+    def confirm_reserve_vols(self) -> bool:
+        return self.skyscanner.confirm_reserve(self.user, self.flights)
 
     #Clase User
     def DadesUsuari(self,name,dni,DirPostal,phonenumber,email):

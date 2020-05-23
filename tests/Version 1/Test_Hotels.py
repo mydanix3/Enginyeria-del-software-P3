@@ -23,37 +23,6 @@ class Test_Flights(unittest.TestCase):
         reserva.remHotel("871654")
         self.assertEqual(reserva.getPreuTotal(), 450)
 
-    def test_confirmacio_hotels_correcte(self):
-
-        reserva = Reserva()
-
-        #usuari introdueix dades
-        reserva.DadesUsuari("Santiago Marco", "49792132B", "08193", "657854321", "santiago.marco@uab.cat")
-
-
-        reserva.addPassengers(3)
-        reserva.addHotel('Hotel Verdi', 10, "871654", 20)
-
-        b = reserva.confirm_reserve_Hotels()
-
-        self.assertTrue(b)
-
-    @mock.patch('src.Booking.Booking.confirm_reserve')
-    def test_confirmacio_hotels_erroni(self,mock_confirm):
-
-        reserva = Reserva()
-
-        #usuari introdueix dades
-        reserva.DadesUsuari("Santiago Marco", "49792132B", "08193", "657854321", "santiago.marco@uab.cat")
-
-        mock_confirm.return_value = False
-
-        reserva.addPassengers(3)
-        reserva.addHotel('Hotel Verdi', 10, "871654", 20)
-
-        b = reserva.confirm_reserve_Hotels()
-
-        self.assertFalse(b)
 
 
 if __name__ == '__main__':

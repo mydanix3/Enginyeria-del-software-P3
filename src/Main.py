@@ -21,6 +21,9 @@ class Reserva:
         self.skyscanner = Skyscanner()
         self.user = User()
         self.numero_de_vegades_pagament_fallat = 0
+        self.numero_de_vegades_confirmar_vols_fallat = 0
+        self.numero_de_vegades_confirmar_hotels_fallat = 0
+        self.numero_de_vegades_confirmar_cotxes_fallat = 0
 
     def getPreuTotal(self):
         return self.getPreuFlights() + self.getPreuHotels() + self.getPreuCars()
@@ -28,40 +31,90 @@ class Reserva:
     #Clase Bank
     def do_payment(self):
         
+        if self.numero_de_vegades_pagament_fallat == 3:
+            
+            self.numero_de_vegades_pagament_fallat = 0
+            print("Cancelant el carregament del pagament")
+            return 2
+                      
+        
         b = self.bank.do_payment(self.user, self.paymentdata)
-           
+        
         if(b):
             print("El pagament s'ha realitzat correctament.")
+            self.numero_de_vegades_pagament_fallat = 0
+            return 0
         else:
+            self.numero_de_vegades_pagament_fallat = self.numero_de_vegades_pagament_fallat + 1
             print("Error al fer el pagament, introdueixi les dades un altre cop.")
+            return 1
             
-        return b
+    
+    
     #Clase Booking
-    def confirm_reserve_Hotels(self) -> bool:
+    def confirm_reserve_Hotels(self):
+        
+        if self.numero_de_vegades_confirmar_hotels_fallat == 3:
+            self.numero_de_vegades_confirmar_hotels_fallat = 0
+            print("cancelant el carregament de la reserva dels hotels")
+            return 2
+            
         b = self.booking.confirm_reserve(self.user, self.hotels)
 
         if(b):
-            print("la reserva del hotel se ha realizado correctamente")
+            self.numero_de_vegades_confirmar_hotels_fallat = 0
+            print("La reserva dels hotels s'ha realitzat correctament")
+            return 0
         else:
-            print("La reserva de los hoteles ha fallado por algún motivo.")
+            self.numero_de_vegades_confirmar_hotels_fallat = self.numero_de_vegades_confirmar_hotels_fallat + 1
+            print("La reserva dels hotels ha fallat per algún motiu.")
+            return 1
 
-        return b
 
     #Clase Rentalcars
-    def confirm_reserve_cotxes(self) -> bool:
+    def confirm_reserve_cotxes(self):
+        
+        if self.numero_de_vegades_confirmar_cotxes_fallat == 3:
+            self.numero_de_vegades_confirmar_cotxes_fallat = 0
+            print("cancelant el carregament de la reserva dels cotxes")
+            return 2
+        
         b = self.rentalcars.confirm_reserve(self.user, self.cars)
+        
 
         if(b):
-            print("la reserva del coche se ha realizado correctamente")
+            self.numero_de_vegades_confirmar_cotxes_fallat = 0
+            print("La reserva dels cotxes s'ha realitzat correctament")
+            return 0
         else:
-            print("La reserva de los coches ha fallado por algún motivo.")
+            self.numero_de_vegades_confirmar_cotxes_fallat = self.numero_de_vegades_confirmar_cotxes_fallat + 1
+            print("La reserva dels cotxes ha fallat per algún motiu.")
+            return 1
 
-        return b
 
 
     #Clase Skyscanner
-    def confirm_reserve_vols(self) -> bool:
-        return self.skyscanner.confirm_reserve(self.user, self.flights)
+    def confirm_reserve_vols(self):
+        
+        if self.numero_de_vegades_confirmar_vols_fallat == 3:
+            
+           self.numero_de_vegades_confirmar_vols_fallat = 0
+           print("cancelant el carregament de la reserva dels vols")
+           return 2
+       
+        
+        b = self.skyscanner.confirm_reserve(self.user, self.flights)
+    
+        if(b):
+            self.numero_de_vegades_confirmar_vols_fallat = 0
+            print("La reserva dels vols s'ha realitzat correctament")
+            return 0
+        else:
+            self.numero_de_vegades_confirmar_vols_fallat = self.numero_de_vegades_confirmar_vols_fallat + 1
+            print("La reserva dels vols ha fallat per algún motiu.")
+            return 1
+            
+            
 
 
     #Clase User

@@ -22,7 +22,8 @@ class Reserva:
         self.user = User()
 
     def getPreuTotal(self):
-        return self.getPreuFlights() + self.getPreuHotels()
+        return self.getPreuFlights() + self.getPreuHotels() + self.preuFinal()
+
     #Clase Bank
     def do_payment(self):
         return self.bank.do_payment(self.user, self.paymentdata)
@@ -30,18 +31,48 @@ class Reserva:
     #Clase Booking
     def confirm_reserve_Hotels(self) -> bool:
         b = self.booking.confirm_reserve(self.user, self.hotels)
-        
+
         if(b):
             print("la reserva del hotel se ha realizado correctamente")
         else:
             print("La reserva de los hoteles ha fallado por algún motivo.")
-        
+
         return b
 
+    #Clase Rentalcars
+    def confirm_reserve_cotxes(self) -> bool:
+        b = self.rentalcars.confirm_reserve(self.user, self.cars)
+
+        if(b):
+            print("la reserva del coche se ha realizado correctamente")
+        else:
+            print("La reserva de los coche ha fallado por algún motivo.")
+
+        return b
+
+
+    #Clase Skyscanner
+    def confirm_reserve_vols(self) -> bool:
+        return self.skyscanner.confirm_reserve(self.user, self.flights)
+
+
+    #Clase User
+    def DadesUsuari(self,name,dni,DirPostal,phonenumber,email):
+        self.user.DadesUsuari(name, dni, DirPostal, phonenumber, email)
+
+
     #Clase Cars
+    def getPreuCars(self):
+        return self.cars.getPreu()
+
+    def addCars(self, code,marca,destination,dias,preu):
+        self.cars.addCar(code,marca,destination,dias,preu,self.flights.getPassengers())
+
+    def removeCars(self, code):
+        self.cars.removeCar(code)
 
 
-    # Clase Flights     
+    #Clase Flights
     def addPassengers(self,passengers):
         self.flights.addPassengers(passengers)
         self.hotels.addGuests(passengers)
@@ -58,29 +89,13 @@ class Reserva:
     def getCodiVol(self, destination, passenger):
         return self.flights.getCodiVol(destination, passenger)
 
-    def getPreuVol(self, codivol):
-        return self.flights.getPreuVol(codivol)
-
-    def get_always_true(self):
-        return self.flights.get_always_true()
-
     def getPassengers(self):
         return self.flights.getPassengers()
-
-    def getDestination(self):
-        return self.flights.getDestination()
-
-    def getCode(self):
-        return self.flights.getCode()
-
-    def getPreu(self):
-        return self.flights.getPreu()
-
 
     #Clase Hotels
     def getPreuHotels(self):
         return self.hotels.getPreu()
-    
+
     def addHotel(self, name, days, code, preu):
         self.hotels.addHotel(name, days, code, preu)
 
@@ -101,18 +116,5 @@ class Reserva:
     def GetTargeta(self):
         return self.paymentdata.GetTargeta()
 
-    #Clase Rentalcars
-    def confirm_reserve_cotxes(self) -> bool:
-        return self.rentalcars.confirm_reserve(self.user, self.cars)
-
-    #Clase Skyscanner
-    def confirm_reserve_vols(self) -> bool:
-        return self.skyscanner.confirm_reserve(self.user, self.flights)
-
-    #Clase User
-    def DadesUsuari(self,name,dni,DirPostal,phonenumber,email):
-        self.user.DadesUsuari(name, dni, DirPostal, phonenumber, email)
 
     #Clase Reserva
-
-

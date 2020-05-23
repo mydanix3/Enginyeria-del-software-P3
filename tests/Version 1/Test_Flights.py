@@ -3,15 +3,15 @@ from src.Main import Reserva
 from unittest import mock
 
 class Test_Flights(unittest.TestCase):
-    
-         
+
+
     def test_Viajeros(self):
         '''
-        vols = Flights(['Roma'], 3) 
+        vols = Flights(['Roma'], 3)
         self.assertEqual(vols.getPassengers(), 3)
         '''
         reserva = Reserva()
-        reserva.addDestination(['Roma'])
+        reserva.addDestination(['Roma'],[5])
         reserva.addPassengers(3)
         self.assertEqual(reserva.getPassengers(), 3)
 
@@ -23,10 +23,10 @@ class Test_Flights(unittest.TestCase):
         self.assertEqual(vols.Destination, [])
         '''
         reserva = Reserva()
-        reserva.addDestination([])
+        reserva.addDestination([],[])
         reserva.addPassengers(3)
         self.assertEqual(reserva.getDestination(), [])
-    
+
 
     def test_ListaVueloVacia(self):
         '''
@@ -34,7 +34,7 @@ class Test_Flights(unittest.TestCase):
         self.assertEqual(vols.Code, [])
         '''
         reserva = Reserva()
-        reserva.addDestination([])
+        reserva.addDestination([],[])
         reserva.addPassengers(3)
         self.assertEqual(reserva.getCode(), [])
 
@@ -44,7 +44,7 @@ class Test_Flights(unittest.TestCase):
         self.assertEqual(vols.getTotalToPay(), 0)
         '''
         reserva = Reserva()
-        reserva.addDestination([])
+        reserva.addDestination([],[])
         reserva.addPassengers(3)
         self.assertEqual(reserva.getTotalToPay(), 0)
 
@@ -55,9 +55,9 @@ class Test_Flights(unittest.TestCase):
         self.assertEqual(vols.Destination, ['Roma', 'Italia'])
         '''
         reserva = Reserva()
-        reserva.addDestination(['Roma'])
+        reserva.addDestination(['Roma'],[5])
         reserva.addPassengers(3)
-        reserva.addDestination('Italia')
+        reserva.addDestination('Italia',[7])
         self.assertEqual(reserva.getDestination(), ['Roma', 'Italia'])
 
     @mock.patch('src.Flights.Flights.getCodiVol')
@@ -71,12 +71,12 @@ class Test_Flights(unittest.TestCase):
         '''
         reserva = Reserva()
         mock_flights.return_value = 123
-        reserva.addDestination(['Roma'])
+        reserva.addDestination(['Roma'],[5])
         reserva.addPassengers(3)
         mock_flights.return_value = 321
-        reserva.addDestination('Italia')
+        reserva.addDestination('Italia',[1])
         self.assertEqual(reserva.getCode(), [123, 321])
-    
+
     @mock.patch('src.Flights.Flights.getPreuVol')
     def test_PreuEsperat(self, mock_preus):
         '''
@@ -89,13 +89,13 @@ class Test_Flights(unittest.TestCase):
         '''
         reserva = Reserva()
         mock_preus.return_value = 50
-        reserva.addDestination(['Roma'])
+        reserva.addDestination(['Roma'],[6])
         reserva.addPassengers(1)
         self.assertEqual(reserva.getTotalToPay(), 50)
         mock_preus.return_value = 40
-        reserva.addDestination('Italia')
+        reserva.addDestination('Italia',[2])
         self.assertEqual(reserva.getTotalToPay(), 90)
-    
+
     @mock.patch('src.Flights.Flights.getPreuVol')
     def test_PreuEsperatMultiple(self, mock_preus):
         '''
@@ -108,13 +108,13 @@ class Test_Flights(unittest.TestCase):
         '''
         reserva = Reserva()
         mock_preus.return_value = 50
-        reserva.addDestination(['Roma'])
+        reserva.addDestination(['Roma'],[2])
         reserva.addPassengers(3)
         self.assertEqual(reserva.getTotalToPay(), 150)
         mock_preus.return_value = 40
-        reserva.addDestination('Italia')
+        reserva.addDestination('Italia',[2])
         self.assertEqual(reserva.getTotalToPay(), 270)
-        
+
     def test_RmDestino_destino(self):
         '''
         vols = Flights(["Roma","Italia","Belgica"],3)
@@ -122,11 +122,11 @@ class Test_Flights(unittest.TestCase):
         self.assertEqual(vols.Destination, ["Roma", "Belgica"])
         '''
         reserva = Reserva()
-        reserva.addDestination(['Roma', 'Italia', 'Belgica'])
+        reserva.addDestination(['Roma', 'Italia', 'Belgica'],[2,5,6])
         reserva.addPassengers(3)
         reserva.remDestination('Italia')
         self.assertEqual(reserva.getDestination(), ["Roma", "Belgica"])
-        
+
     @mock.patch('src.Flights.Flights.getCodiVol')
     def test_RmDestino_codigo(self, mock_flights):
         '''
@@ -141,15 +141,15 @@ class Test_Flights(unittest.TestCase):
         '''
         reserva = Reserva()
         mock_flights.return_value = 123
-        reserva.addDestination(['Roma'])
+        reserva.addDestination(['Roma'],[2])
         reserva.addPassengers(3)
         mock_flights.return_value = 321
-        reserva.addDestination('Italia')
+        reserva.addDestination('Italia',[2])
         mock_flights.return_value = 444
-        reserva.addDestination('Belgica')
+        reserva.addDestination('Belgica',[2])
         reserva.remDestination('Italia')
         self.assertEqual(reserva.getCode(), [123, 444])
-        
+
     @mock.patch('src.Flights.Flights.getPreuVol')
     def test_RmDestino_preu(self, mock_flights):
         '''
@@ -165,22 +165,29 @@ class Test_Flights(unittest.TestCase):
         '''
         reserva = Reserva()
         mock_flights.return_value = 50
-        reserva.addDestination('Roma')
+        reserva.addDestination('Roma',[2])
         reserva.addPassengers(3)
         mock_flights.return_value = 40
-        reserva.addDestination("Italia")
+        reserva.addDestination("Italia",[2])
         mock_flights.return_value = 30
-        reserva.addDestination("Belgica")
+        reserva.addDestination("Belgica",[2])
         self.assertEqual(reserva.getTotalToPay(), 360)
         reserva.remDestination('Italia')
         self.assertEqual(reserva.getTotalToPay(), 240)
 
 
+<<<<<<< Updated upstream
     
         
         
     
     
+=======
+
+
+
+
+>>>>>>> Stashed changes
 
 
 

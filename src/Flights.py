@@ -5,12 +5,13 @@ class Flights:
         self.Passengers = 0
         self.Code = []
         self.Preu = []
-        
+        self.Dias = []
+
 
     def addPassengers(self,passengers):
         self.Passengers += passengers
 
-    def addDestination(self, destination):
+    def addDestination(self, destination, dias):
         listaux=[]
         if type(destination) == str:
             listaux.append(destination)
@@ -20,7 +21,7 @@ class Flights:
             self.Code.append(self.getCodiVol(destination, self.Passengers))
             self.Destination.append(listaux[x])
             self.Preu.append(self.getPreuVol(self.Code[-1]))
-
+            self.Dias.append(dias)
 
     def remDestination(self, destination):
         if destination in self.Destination:
@@ -28,6 +29,7 @@ class Flights:
             self.Destination.pop(index)
             self.Preu.pop(index)
             self.Code.pop(index)
+            self.Dias.pop(index)
 
     def get_always_true():
         return False
@@ -43,26 +45,24 @@ class Flights:
 
     def getPreu(self):
         return self.Preu
-            
-            
+
+
     def getTotalToPay(self):
-        
+
         Total_Pay = 0
-     
+
         for i in self.Preu:
             Total_Pay = Total_Pay + i
-            
+
         Total_Pay = Total_Pay * self.Passengers
         return Total_Pay
-            
+
     ##dummy function API skyscanner returns codi vol depenent numero de passatgers i destinació,
     ##buscarà vol més barat
     def getCodiVol(self, destination, passenger):
         codi = 0
         return codi
-    
+
     ##dummy function API skyscanner returns preu vol depenens el seu codi
     def getPreuVol(self, codivol):
         return 0
-
-    

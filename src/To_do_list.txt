@@ -1,0 +1,69 @@
+TO DO LIST
+
+Test_cars:
+
+-Un test per tal de comprovar si a l'afegir un cotxe a la reserva el preu
+  és el que correspon.
+
+-Un test que comprovi en cas d'eliminar un cotxe de la reserva el preu és
+el que correspon.
+
+-Un test que confirmi la reserva del cotxe.
+
+Test_Flights:
+
+-Un test que donat un vol comprovi si el número de viatgers és l'esperat.
+
+-Un test que donat un viatge sense destinació comprovi que la llista de destinacions
+es buida.
+
+- Un test que comprovi si la llista de vols es buida donat un viatge sense destinacions.
+
+-Un test que comprovi si donat un vol sense destinacions, el preu és l'esperat.
+
+-Un test que despres d'afegir destins, la llista de destins estigui correctament actualitzada.
+
+-Implementar un test que comprovi que el codi del vol després d'afegir un destí és l'esperat.
+
+-Donat un vol amb un sol viatger, comprovar que el preu és correcte.
+
+-Comprovar si en cas d'un vol amb més d'un viatger el preu és correcte.
+
+-Comprovar si en cas d'eliminar un destí de la llista de destins aquesta és l'esperada.
+
+-Implementar un test que comprovi que el codi del vol després d'eliminar un destí és l'esperat.
+
+-Un test que comprovi si després d'eliminar un destí el preu és l'esperat.
+
+Test_Hotels:
+
+-Un test que afegint un hotel a la reserva comprovi que el preu és l'esperat.
+
+-Un test que eliminant un hotel a la reserva comprovi que el preu és l'esperat.
+
+-Un test que confirmi que la reserva de l'hotel és correcte.
+
+-Un test que comprovi si la reserva és errònia.
+
+Test Sky_Scanner:
+
+-Un test que donada una reserva amb una sèrie de vols comprovi si s'ha fet correctament.
+
+-Un test que donada una reserva de vol comprovi si hi ha hagut un error en la realització de la reserva.
+
+-Implementar un test que ens permeti després d'haver vist que una reserva ha sigut errònia, reintentar-la
+amb un màxim d'intents.
+
+-Un test que una vegada en el bucle del reintent de fer la reserva comprovi si s'ha fet correctament al segon intent.
+
+Test_Bank:
+
+-Un test que donat un cert pagament confirmi que es fa correctament.
+
+-Un test que provi si donada una reserva el tipus de targeta amb la qual es fa el pagament és la correcte.
+
+-Un test que comprovi el cas en què hi hagi un error en el pagament.
+
+-Un test que ens permeti en cas d'error en el pagament tornar a realitzar-lo (amb un màxim d'intents).
+
+-Un test que comprovi si després d'un error en el pagament, l'usuari ha fet correctament el pagament en un segon intent.

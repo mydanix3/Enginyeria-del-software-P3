@@ -22,8 +22,8 @@ class Reserva:
         self.user = User()
 
     #Clase Bank
-    def do_payment(self, user: User, payment_data: PaymentData):
-        return self.bank.do_payment(user, payment_data)
+    def do_payment(self):
+        return self.bank.do_payment(self.user, self.paymentdata)
 
     #Clase Booking
     def confirm_reserve(self, user: User, hotels: Hotels) -> bool:
@@ -49,7 +49,7 @@ class Reserva:
         return self.flights.getCodiVol(destination, passenger)
 
     def getPreuVol(self, codivol):
-        self.flights.getPreuVol(codivol)
+        return self.flights.getPreuVol(codivol)
 
     def get_always_true(self):
         return self.flights.get_always_true()
@@ -79,6 +79,9 @@ class Reserva:
     def DadesTarjeta(self, nomtitular, numtargeta, codiseguretat):
         self.paymentdata.DadesTarjeta(nomtitular, numtargeta, codiseguretat)
 
+    def GetTargeta(self):
+        return self.paymentdata.GetTargeta()
+
     #Clase Rentalcars
     def confirm_reserve(self, user: User, cars: Cars) -> bool:
         return self.rentalcars.confirm_reserve(user, cars)
@@ -92,4 +95,5 @@ class Reserva:
         self.user.DadesUsuari(name, dni, DirPostal, phonenumber, email)
 
     #Clase Reserva
+
 

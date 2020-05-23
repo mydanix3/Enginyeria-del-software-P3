@@ -174,7 +174,8 @@ class Test_Flights(unittest.TestCase):
         self.assertEqual(reserva.getTotalToPay(), 360)
         reserva.remDestination('Italia')
         self.assertEqual(reserva.getTotalToPay(), 240)
-        
+
+
     
         
         

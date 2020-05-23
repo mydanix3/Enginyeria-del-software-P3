@@ -3,7 +3,7 @@ from src.Main import Reserva
 from unittest import mock
 from src.Booking import Booking 
 
-class Test_Booking:
+class Test_Booking(unittest.TestCase):
     
     def test_confirmacio_hotels_correcte(self):
 

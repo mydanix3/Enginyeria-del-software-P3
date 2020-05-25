@@ -6,5 +6,5 @@ save_non_project_files = False
 
 [main]
 version = 0.2.0
-recent_files = ['src\\Flights.py', 'src\\Bank.py', 'src\\PaymentData.py', 'src\\Main.py', 'src\\readme.txt', '..\\..\\..\\..\\..\\anaconda3\\lib\\unittest\\mock.py', 'src\\Booking.py', 'tests\\Test_Bank.py', 'tests\\Test_Booking.py', 'tests\\Test_Cars.py', 'tests\\Test_Flights.py', 'tests\\Test_Hotels.py', 'tests\\Test_RentalCars.py', 'tests\\Test_SkyScanner.py']
+recent_files = ['src\\Flights.py', 'src\\Bank.py', 'src\\PaymentData.py', 'src\\Main.py', 'src\\readme.txt', '..\\..\\..\\..\\..\\anaconda3\\lib\\unittest\\mock.py', 'src\\Booking.py', 'tests\\Test_Bank.py', 'tests\\Test_Booking.py', 'tests\\Test_Cars.py', 'tests\\Test_Flights.py', 'tests\\Test_Hotels.py', 'tests\\Test_RentalCars.py', 'tests\\Test_SkyScanner.py', 'tests\\__init__.py']
 
